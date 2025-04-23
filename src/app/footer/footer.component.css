@@ -1,0 +1,75 @@
+h5{
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+h3{
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #E19B8B;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.section-one{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 50%;
+}
+
+.section-one .text{
+    width: 500px ;
+    
+}
+
+.section-two{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 64px;
+}
+
+
+.section-two .container-two .email{
+    display: flex;
+    align-items: center;
+}
+
+.section-two .container-two .email-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ffff;
+    padding-left: 9px;
+    padding-right: 150px;
+    gap: 220px;
+    height: 40px;
+}
+
+.section-two .container-two .submit{
+    background-color: #D41414;
+    color: #ffff;
+    height: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.section-two .container-two .sub-texts{
+    width: 400px;
+}
