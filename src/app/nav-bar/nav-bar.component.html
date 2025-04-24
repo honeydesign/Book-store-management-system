@@ -4,47 +4,75 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp" rel="stylesheet" />
-    
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="nav-bar">
     <div class="section-one">
-        <div class="logo">
-            <img src="/assets/book logo.jpg" alt="">
+      <div class="logo">
+        <img src="/assets/book logo.jpg" alt="Logo">
+      </div>
+      <div class="nav-sections">
+        <div class="nav-text">
+          <h4>New Books</h4>
+          <span class="material-symbols-outlined">expand_more</span>
         </div>
-        <div class="nav-sections">
-            <div class="nav-text"><h4>New Books</h4>
-                <span class="material-symbols-outlined">
-                stat_minus_1
-                </span>
-            </div>
-            <div class="nav-text"><h4>Fiction</h4>
-                    <span class="material-symbols-outlined">
-                    stat_minus_1
-                    </span>
-            </div>
-            <div class="nav-text"><h4>Non Fiction</h4>
-                        <span class="material-symbols-outlined">
-                        stat_minus_1
-                        </span>
-            </div>
-            <div class="nav-text"><h4>Children</h4>
-                <span class="material-symbols-outlined">
-                            stat_minus_1
-                </span>
-            </div>
+        <div class="nav-text" (click)="toggleDropdown('fiction')">
+          <h4>Fiction</h4>
+          <span class="material-symbols-outlined">expand_more</span>
+          <div *ngIf="activeDropdown === 'fiction'" class="dropdown-menu">
+            <div>Classics</div>
+            <div>Crime fiction</div>
+            <div>Fantasy</div>
+            <div>Fiction in Translation</div>
+            <div>Horror</div>
+          </div>
         </div>
+        <div class="nav-text">
+          <h4>Non Fiction</h4>
+          <span class="material-symbols-outlined">expand_more</span>
+        </div>
+        <div class="nav-text">
+          <h4>Children</h4>
+          <span class="material-symbols-outlined">expand_more</span>
+        </div>
+      </div>
     </div>
+  
+    <!-- Hamburger Menu Icon (Visible on mobile and tablet) -->
+    <div class="hamburger-menu" (click)="toggleMenu()">
+      <span class="material-symbols-outlined">menu</span>
+    </div>
+  
     <div class="section-two">
-        <div class="search">
-            <h5>Search anything</h5>
-            <span class="material-symbols-outlined">
-                search
-                </span>
-        </div>
-        <div class="sign-up">
-            <h4>Sign Up</h4>
-        </div>
+      <div class="search">
+        <h5>Search anything</h5>
+        <span class="material-symbols-outlined">search</span>
+      </div>
+      <div class="sign-up">
+        <h4>Sign Up</h4>
+      </div>
     </div>
-</div>
-
+  </div>
+  
+  <!-- Sidebar Menu -->
+  <div [ngClass]="{'active': menuOpen}" class="sidebar">
+    <div class="sidebar-content">
+      <!-- Close Button -->
+      <div class="close-btn" (click)="toggleMenu()">
+        <span class="material-symbols-outlined">close</span>
+      </div>
+      <div class="nav-text"><h4>New Books</h4></div>
+      <div class="nav-text" (click)="toggleDropdown('fiction')"><h4>Fiction</h4>
+        <div *ngIf="activeDropdown === 'fiction'" class="dropdown-menu">
+          <div>Classics</div>
+          <div>Crime fiction</div>
+          <div>Fantasy</div>
+          <div>Fiction in Translation</div>
+          <div>Horror</div>
+        </div>
+      </div>
+      <div class="nav-text"><h4>Non Fiction</h4></div>
+      <div class="nav-text"><h4>Children</h4></div>
+    </div>
+  </div>
+  
