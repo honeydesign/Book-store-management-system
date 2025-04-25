@@ -1,0 +1,137 @@
+h1{
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+h3 {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+h4 {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+h5 {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background-color: #E19B8B;
+    padding-top: 50px;
+    padding-bottom: 40px;
+    width: 100%;
+}
+
+.section-one{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.section-one .text-container{
+    width: 500px;
+}
+
+.section-one .text-container .sub-title{
+    padding-bottom: 40px;
+}
+
+.section-one .button{
+    background-color: #D41414;
+    color: #ffff;
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-two{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    width: 80%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 12px;
+}
+
+.container{
+    display: flex ;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .section-one {
+      flex-direction: column;
+      text-align: center;
+      gap: 20px;
+    }
+  
+    .section-one .text-container {
+      width: 90%;
+    }
+  
+    .section-one .book-img img {
+      width: 90%;
+      height: auto;
+    }
+  
+    .section-two {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 20px;
+    }
+  
+    .container {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .section-one .button {
+      width: 80%;
+    }
+  
+    .container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .container .icon img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  

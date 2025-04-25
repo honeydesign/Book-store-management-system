@@ -1,75 +1,133 @@
-h5{
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-    font-variation-settings: "wdth" 100;
+h5 {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
 
-h3{
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings: "wdth" 100;
+h3 {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
 
-.footer{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background-color: #E19B8B;
-    width: 100%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #E19B8B;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  flex-wrap: wrap; /* Allows elements to wrap on smaller screens */
 }
 
-.section-one{
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    width: 50%;
+.section-one {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 50%;
+  max-width: 500px; /* Ensures section-one doesn't stretch too wide */
 }
 
-.section-one .text{
-    width: 500px ;
-    
+.section-one .text {
+  width: 500px;
 }
 
-.section-two{
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 64px;
+.section-two {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 64px;
+  width: 50%;
+  max-width: 700px; /* Ensures section-two doesn't stretch too wide */
 }
 
-
-.section-two .container-two .email{
-    display: flex;
-    align-items: center;
+.section-two .container-two .email {
+  display: flex;
+  align-items: center;
 }
 
 .section-two .container-two .email-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #ffff;
-    padding-left: 9px;
-    padding-right: 150px;
-    gap: 220px;
-    height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffff;
+  padding-left: 9px;
+  padding-right: 150px;
+  gap: 220px;
+  height: 40px;
 }
 
-.section-two .container-two .submit{
-    background-color: #D41414;
-    color: #ffff;
-    height: 40px;
-    padding-left: 30px;
-    padding-right: 30px;
-    display: flex;
-    align-items: center;
+.section-two .container-two .submit {
+  background-color: #D41414;
+  color: #ffff;
+  height: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
 }
 
-.section-two .container-two .sub-texts{
-    width: 400px;
+.section-two .container-two .sub-texts {
+  width: 400px;
+}
+
+/* Add media queries for responsiveness */
+@media (max-width: 1200px) {
+  .footer {
+      flex-direction: column; /* Stack the sections on medium screens */
+      align-items: center;
+  }
+
+  .section-one, .section-two {
+      width: 90%; /* Ensure sections are not too wide on smaller screens */
+  }
+
+  .section-two {
+      flex-direction: column; /* Stack elements vertically in section-two on smaller screens */
+      gap: 30px; /* Reduce gap between elements */
+      align-items: center; /* Center align items in section-two */
+  }
+
+  .section-two .container-two .email-container {
+      padding-right: 100px; /* Adjust padding for smaller screens */
+      gap: 50px; /* Adjust gap for smaller screens */
+  }
+
+  .section-two .container-two .submit {
+      padding-left: 20px;
+      padding-right: 20px;
+  }
+
+  .section-two .container-two .sub-texts {
+      width: 100%; /* Allow the sub-texts to take up full width on small screens */
+      text-align: center; /* Center align text on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+      padding-top: 10px;
+      padding-bottom: 10px;
+  }
+
+  .section-one, .section-two {
+      width: 100%; /* Make sections full width on very small screens */
+      padding: 10px;
+  }
+
+  .section-two .container-two .email-container {
+      padding-right: 50px; /* Further adjust padding for very small screens */
+  }
+
+  .section-two .container-two .submit {
+      width: 100%; /* Make the submit button full width on small screens */
+      text-align: center; /* Center align the submit button */
+      padding-left: 20px;
+      padding-right: 20px;
+  }
 }

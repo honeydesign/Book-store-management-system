@@ -8,7 +8,7 @@ describe('NavBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavBarComponent] // ✅ Standalone component should go here
+      imports: [NavBarComponent] 
     }).compileComponents();
 
     fixture = TestBed.createComponent(NavBarComponent);
