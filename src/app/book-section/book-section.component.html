@@ -1,1 +1,51 @@
-<h1>Latest Books</h1>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="book">
+  <div class="book-section">
+    <h2>Latest Books</h2>
+    <div class="book-cards">
+      <app-book-card *ngFor="let book of latestBooks" 
+                     [bookTitle]="book.title" 
+                     [bookAuthor]="book.author" 
+                     [bookImage]="book.image"
+                     [bookPrice]="book.price"
+                     [bookRating]="book.rating">
+      </app-book-card>
+    </div>
+  </div>
+  
+  <div class="book-section">
+    <h2>Fiction Books</h2>
+    <div class="book-cards">
+      <app-book-card *ngFor="let book of fictionBooks" 
+                     [bookTitle]="book.title" 
+                     [bookAuthor]="book.author" 
+                     [bookImage]="book.image"
+                     [bookPrice]="book.price"
+                     [bookRating]="book.rating">
+      </app-book-card>
+    </div>
+  </div>
+  
+  <div class="book-section">
+    <h2>Non-Fiction Books</h2>
+    <div class="book-cards">
+      <app-book-card *ngFor="let book of nonFictionBooks" 
+                     [bookTitle]="book.title" 
+                     [bookAuthor]="book.author" 
+                     [bookImage]="book.image"
+                     [bookPrice]="book.price"
+                     [bookRating]="book.rating">
+      </app-book-card>
+    </div>
+  </div>
+  
+
+</div>
+
