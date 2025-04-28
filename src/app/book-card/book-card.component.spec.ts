@@ -41,7 +41,7 @@ describe('BookCardComponent', () => {
     fixture.detectChanges();
   
     // Now the button should exist in the DOM
-    const button = fixture.debugElement.query(By.css('button.show-button'));
+    const button = fixture.debugElement.query(By.css('button.show-details-btn'));
   
     expect(button).toBeTruthy();  // Make sure the button is now present
     expect(button.nativeElement.textContent).toContain('View Details');

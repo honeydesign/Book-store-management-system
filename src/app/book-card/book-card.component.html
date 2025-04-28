@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="book-card" (mouseenter)="hover = true" (mouseleave)="hover = false">
     <img [src]="bookImage" alt="{{ bookTitle }}">
+    <button *ngIf="hover" class="show-details-btn">View Details</button>
     <h3>{{ bookTitle }}</h3>
     <p>{{ bookAuthor }}</p>
     <p class="price">{{ bookPrice | currency:'GBP' }}</p>
@@ -14,7 +15,7 @@
       <span *ngFor="let star of [].constructor(bookRating)">★</span>
     </div>
   
-    <button *ngIf="hover" class="show-button">View Details</button>
+    
   </div>
   
   
