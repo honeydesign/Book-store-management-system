@@ -10,12 +10,12 @@
 <div class="container">
     <div class="logo">
         <img src="/assets/book logo.jpg" alt="" width="120px">
-        <h2>Welcome to bookstore!</h2>
+        <h2>Welcome Back!</h2>
     </div>
     <div class="options">
-        <div class="signup"><p>Sign Up</p></div>
+        <div class="signup" (click)="navigateToSignup()"><p>Sign Up</p></div>
         <div class="line"> | </div>
-        <div class="login" (click)="navigateToLogin()"><p>Login</p></div>
+        <div class="login"><p>Login</p></div>
     </div>
     <div class="text-container">
         <div class="email">
@@ -31,18 +31,6 @@
               </span>
             </div>
         </div>
-          
-          
-          <div class="password">
-            <div><p>Re-type Password</p></div>
-            <div class="password-input-container">
-              <input type="password" id="password" name="password" required placeholder="Enter your password">
-              <span class="material-icons toggle-password" (click)="togglePasswordVisibility()">
-                visibility
-              </span>
-            </div>
-          </div>
     </div>
-          
     <div class="submit"><button type="submit">Submit</button></div>
 </div>

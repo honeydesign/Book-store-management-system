@@ -49,7 +49,7 @@ button{
     gap: 20px;
 }
 
-.signup{
+.login{
     color: #D41414;
 }
 
@@ -57,15 +57,15 @@ button{
     padding-bottom: 30px;
 }
 
-.login {
+.signup {
     cursor: pointer;
-}
+  }
   
-.login:hover {
+.signup:hover {
     color: #D41414;
-}
+  }
 
-.password-input-container {
+  .password-input-container {
     position: relative;
     display: flex;
     align-items: center;
@@ -82,4 +82,3 @@ button{
     cursor: pointer;
     user-select: none; 
   }
-  

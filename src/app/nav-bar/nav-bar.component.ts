@@ -22,7 +22,7 @@ export class NavBarComponent {
     this.menuOpen = !this.menuOpen;
   }
 
-  navigateToSignUp() {   // ✅ Create this function
+  navigateToSignUp() {   
     this.router.navigate(['/signup']); 
   }
 }

@@ -2,18 +2,19 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-sign-up',
+  selector: 'app-log-in',
   imports: [],
-  templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css'
+  templateUrl: './log-in.component.html',
+  styleUrl: './log-in.component.css'
 })
-export class SignUpComponent {
+export class LogInComponent {
 
   constructor(private router: Router) {}
 
-  navigateToLogin() {
-    this.router.navigate(['/login']);
+  navigateToSignup() {
+    this.router.navigate(['/signup']);
   }
+
 
   togglePasswordVisibility() {
     const passwordInput = document.getElementById('password') as HTMLInputElement;
@@ -23,4 +24,5 @@ export class SignUpComponent {
       passwordInput.type = 'password';
     }
   }
+  
 }
