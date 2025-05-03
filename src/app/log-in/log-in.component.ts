@@ -15,6 +15,10 @@ export class LogInComponent {
     this.router.navigate(['/signup']);
   }
 
+  navigateToDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+
 
   togglePasswordVisibility() {
     const passwordInput = document.getElementById('password') as HTMLInputElement;
