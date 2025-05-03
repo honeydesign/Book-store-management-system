@@ -1,0 +1,28 @@
+import { createServerClient } from "@/lib/supabase/server";
+import { type NextRequest, NextResponse } from "next/server";
+import type { ApiResponse } from "@/lib/types/api.types";
+import { cookies } from "next/headers";
+
+export async function POST(request: NextRequest) {
+  try {
+    const supabase = createServerClient();
+
+    // Sign out user
+    await supabase.auth.signOut();
+
+    // Clear auth cookie
+    const cookieStore = await cookies();
+    cookieStore.delete("sb-auth-token");
+
+    return NextResponse.json<ApiResponse<null>>(
+      { success: true },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Logout error:", error);
+    return NextResponse.json<ApiResponse<null>>(
+      { success: false, error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
