@@ -1,0 +1,185 @@
+import { createServerClient } from "@/lib/supabase/server";
+import { type NextRequest, NextResponse } from "next/server";
+import type { ApiResponse, UpdateBook } from "@/lib/types/api.types";
+import { requireAuth } from "@/lib/utils/auth";
+
+// GET book by ID
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const user = await requireAuth(request);
+
+    if (!user || (typeof user === "object" && "status" in user)) {
+      return user;
+    }
+
+    const { id: bookId } = await params;
+
+    const supabase = createServerClient();
+    const { data, error } = await supabase
+      .from("books")
+      .select("*")
+      .eq("id", bookId)
+      .single();
+
+    if (error) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: error.message },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json<ApiResponse<typeof data>>(
+      { success: true, data },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Get book error:", error);
+    return NextResponse.json<ApiResponse<null>>(
+      { success: false, error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+
+// UPDATE book
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const user = await requireAuth(request);
+
+    if (!user || (typeof user === "object" && "status" in user)) {
+      return user;
+    }
+
+    const { id: bookId } = await params;
+
+    // Get current book to check permissions
+    const supabase = createServerClient();
+    const { data: book, error: bookError } = await supabase
+      .from("books")
+      .select("*")
+      .eq("id", bookId)
+      .single();
+
+    if (bookError) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: bookError.message },
+        { status: 404 }
+      );
+    }
+
+    // Check if user is the author or seller of the book
+    if (book.author_id !== user.id && book.seller_id !== user.id) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: "Unauthorized" },
+        { status: 403 }
+      );
+    }
+
+    const body = await request.json();
+    const { title, description, price, stock } = body;
+
+    // Create update object with only provided fields
+    const updateData: UpdateBook = {};
+
+    // Author can update title and description
+    if (book.author_id === user.id) {
+      if (title !== undefined) updateData.title = title;
+      if (description !== undefined) updateData.description = description;
+    }
+
+    // Seller can update price and stock
+    if (book.seller_id === user.id) {
+      if (price !== undefined) updateData.price = price;
+      if (stock !== undefined) updateData.stock = stock;
+    }
+
+    const { data, error } = await supabase
+      .from("books")
+      .update(updateData)
+      .eq("id", bookId)
+      .select()
+      .single();
+
+    if (error) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: error.message },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json<ApiResponse<typeof data>>(
+      { success: true, data },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Update book error:", error);
+    return NextResponse.json<ApiResponse<null>>(
+      { success: false, error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE book
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const user = await requireAuth(request);
+
+    if (!user || (typeof user === "object" && "status" in user)) {
+      return user;
+    }
+    const { id: bookId } = await params;
+
+    // Get current book to check permissions
+    const supabase = createServerClient();
+    const { data: book, error: bookError } = await supabase
+      .from("books")
+      .select("*")
+      .eq("id", bookId)
+      .single();
+
+    if (bookError) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: bookError.message },
+        { status: 404 }
+      );
+    }
+
+    // Only the author can delete a book
+    if (book.author_id !== user.id) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: "Unauthorized" },
+        { status: 403 }
+      );
+    }
+
+    const { error } = await supabase.from("books").delete().eq("id", bookId);
+
+    if (error) {
+      return NextResponse.json<ApiResponse<null>>(
+        { success: false, error: error.message },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json<ApiResponse<null>>(
+      { success: true },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Delete book error:", error);
+    return NextResponse.json<ApiResponse<null>>(
+      { success: false, error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
