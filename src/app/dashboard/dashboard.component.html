@@ -7,39 +7,61 @@
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo">
-            <img src="/assets/book logo.jpg" alt="">
+            <img src="/assets/book logo.jpg" alt="Book Store Logo">
         </div>
         <nav class="nav-menu">
-            <div class="nav-item" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-item"
+               routerLink="/dashboard"
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }">
                 <span class="material-icons nav-icon">dashboard</span>
                 <span class="nav-text">Dashboard</span>
-            </div>
-            <div class="nav-item" routerLink="/orders" routerLinkActive="active">
+            </a>
+            <a class="nav-item"
+               routerLink="/orders"
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }">
                 <span class="material-icons nav-icon">inventory</span>
                 <span class="nav-text">Order Management</span>
-            </div>
-            <div class="nav-item" routerLink="/customers" routerLinkActive="active">
+            </a>
+            <a class="nav-item"
+               routerLink="/customers"
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }">
                 <span class="material-icons nav-icon">people</span>
                 <span class="nav-text">Customers</span>
-            </div>
-            <div class="nav-item" routerLink="/transactions" routerLinkActive="active">
+            </a>
+            <a class="nav-item"
+               routerLink="/transactions"
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }">
                 <span class="material-icons nav-icon">credit_card</span>
                 <span class="nav-text">Transactions</span>
-            </div>
-            <div class="nav-item" routerLink="/add-products" routerLinkActive="active">
+            </a>
+            <a class="nav-item"
+               routerLink="/add-products"
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }">
                 <span class="material-icons nav-icon">add_box</span>
                 <span class="nav-text">Add Products</span>
-            </div>
-            <div class="nav-item" routerLink="/admin-role" routerLinkActive="active">
+            </a>
+            <a class="nav-item"
+               routerLink="/admin-role"
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }">
                 <span class="material-icons nav-icon">admin_panel_settings</span>
                 <span class="nav-text">Admin Role</span>
-            </div>
-            <div class="nav-item" routerLink="/settings" routerLinkActive="active">
+            </a>
+            <a class="nav-item"
+               routerLink="/settings"
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }">
                 <span class="material-icons nav-icon">settings</span>
                 <span class="nav-text">Settings</span>
-            </div>
+            </a>
         </nav>
     </aside>
+   
 
     <!-- Main Content -->
     <div class="main-content">

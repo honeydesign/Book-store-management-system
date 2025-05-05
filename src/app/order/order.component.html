@@ -1,0 +1,167 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="admin-dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="/assets/book logo.jpg" alt="Logo">
+        </div>
+        <nav class="nav-menu">
+            <div class="nav-item" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <span class="material-icons nav-icon">dashboard</span>
+                <span class="nav-text">Dashboard</span>
+            </div>
+            <div class="nav-item active" routerLink="/orders" routerLinkActive="active">
+                <span class="material-icons nav-icon">inventory</span>
+                <span class="nav-text">Order Management</span>
+            </div>
+            <div class="nav-item" routerLink="/customers" routerLinkActive="active">
+                <span class="material-icons nav-icon">people</span>
+                <span class="nav-text">Customers</span>
+            </div>
+            <div class="nav-item" routerLink="/transactions" routerLinkActive="active">
+                <span class="material-icons nav-icon">credit_card</span>
+                <span class="nav-text">Transactions</span>
+            </div>
+            <div class="nav-item" routerLink="/add-products" routerLinkActive="active">
+                <span class="material-icons nav-icon">add_box</span>
+                <span class="nav-text">Add Products</span>
+            </div>
+            <div class="nav-item" routerLink="/admin-role" routerLinkActive="active">
+                <span class="material-icons nav-icon">admin_panel_settings</span>
+                <span class="nav-text">Admin Role</span>
+            </div>
+            <div class="nav-item" routerLink="/settings" routerLinkActive="active">
+                <span class="material-icons nav-icon">settings</span>
+                <span class="nav-text">Settings</span>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <h2>Order Management</h2>
+            <div class="top-bar-right">
+                <div class="search-box">
+                    <span class="material-icons search-icon">search</span>
+                    <input type="text" placeholder="Search orders...">
+                </div>
+                <span class="material-icons notification-icon">notifications</span>
+                <img src="/assets/admin.jpg" alt="Admin" class="admin-avatar">
+            </div>
+        </header>
+
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="card-header">
+                    <h3>Total Orders</h3>
+                    <span class="material-icons">assignment</span>
+                </div>
+                <div class="card-body">
+                    <h2>1,200</h2>
+                    <p>Total placed orders</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="card-header">
+                    <h3>New Orders</h3>
+                    <span class="material-icons">fiber_new</span>
+                </div>
+                <div class="card-body">
+                    <h2>150</h2>
+                    <p>New this week</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="card-header">
+                    <h3>Completed Orders</h3>
+                    <span class="material-icons">check_circle</span>
+                </div>
+                <div class="card-body">
+                    <h2>950</h2>
+                    <p>Successfully delivered</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="card-header">
+                    <h3>Cancelled Orders</h3>
+                    <span class="material-icons">cancel</span>
+                </div>
+                <div class="card-body">
+                    <h2>100</h2>
+                    <p>Cancelled by users</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+       <!-- Filter Tabs Section -->
+<div class="order-filters">
+    <div
+      class="filter-tab"
+      [class.active]="selectedFilter === 'all'"
+      (click)="setFilter('all')"
+    >
+      All Orders
+    </div>
+    <div
+      class="filter-tab"
+      [class.active]="selectedFilter === 'completed'"
+      (click)="setFilter('completed')"
+    >
+      Completed Orders
+    </div>
+    <div
+      class="filter-tab"
+      [class.active]="selectedFilter === 'pending'"
+      (click)="setFilter('pending')"
+    >
+      Pending Orders
+    </div>
+    <div
+      class="filter-tab"
+      [class.active]="selectedFilter === 'cancelled'"
+      (click)="setFilter('cancelled')"
+    >
+      Cancelled Orders
+    </div>
+  </div>
+  
+
+        <!-- Orders Table -->
+        <section class="order-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Product Name</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of filteredOrders">
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.productName }}</td>
+                        <td>{{ order.date }}</td>
+                        <td>{{ order.price | currency }}</td>
+                        <td>{{ order.payment }}</td>
+                        <td [ngClass]="{
+                            'status-completed': order.status === 'completed',
+                            'status-pending': order.status === 'pending',
+                            'status-cancelled': order.status === 'cancelled'
+                        }">{{ order.status }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>

@@ -11,6 +11,20 @@
     font-style: normal;
     font-variation-settings: "wdth" 100;
   }
+
+  h3 {
+    font-size: 1.1rem;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+  }
+
+  p {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+  }
   
   /* Sidebar */
   .sidebar {
@@ -122,58 +136,47 @@
     border-radius: 50%;
   }
   
-  /* Graph Section */
-  .graph-section {
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    height: 500px; /* Set a fixed height for the chart */
+  /* Order Management Page Layout */
+  /* Styling for Filter Tabs */
+.order-filters {
+    display: flex;
+    gap: 1rem;
+    /* margin: 1rem 0; */
+    margin-top: 2rem;
   }
   
-  /* Product Details */
-  .product-details {
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  .filter-tab {
+    padding: 0.5rem 1rem;
+    background: #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  table thead {
-    background: #D41414;
+  .filter-tab.active {
+    background: #d32f2f; /* Active state - red */
     color: white;
   }
   
-  table th,
-  table td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  .filter-tab:hover {
+    background: #c62828; /* Hover state */
+    color: white;
   }
   
   .summary-cards {
     display: flex;
-    gap: 1.5rem;
-    margin-bottom: 20px;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
   }
   
   .summary-card {
-    flex: 1;
     background: #fff;
-    border-radius: 12px;
     padding: 1rem;
+    flex: 1;
+    min-width: 200px;
+    border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
-  
-  .summary-card:hover {
-    transform: translateY(-5px);
   }
   
   .card-header {
@@ -182,36 +185,41 @@
     align-items: center;
   }
   
-  .card-header h3 {
-    font-size: 1.1rem;
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
-    font-variation-settings: "wdth" 100;
+  .order-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
   }
   
-  .card-body h2 {
-    font-size: 2rem;
-    margin: 0.5rem 0;
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
-    font-variation-settings: "wdth" 100;
+  .order-table thead {
+    background-color: #D41414; /* Matching color for the header */
+    color: white;
   }
   
-  .card-body p {
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-
+  .order-table th, .order-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
   }
   
-  .up {
+  .order-table th {
+    font-weight: bold;
+  }
+  
+  
+  /* Status Colors */
+  .status-completed {
     color: green;
+    font-weight: bold;
   }
   
-  .down {
+  .status-pending {
+    color: orange;
+    font-weight: bold;
+  }
+  
+  .status-cancelled {
     color: red;
+    font-weight: bold;
   }
   
