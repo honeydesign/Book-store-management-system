@@ -1,0 +1,133 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <div class="admin-dashboard">
+            <aside class="sidebar">
+                <div class="logo">
+                    <img src="/assets/book logo.jpg" alt="Logo">
+                </div>
+                <nav class="nav-menu">
+                    <div class="nav-item" routerLink="/dashboard" routerLinkActive="active">
+                        <span class="material-icons nav-icon">dashboard</span>
+                        <span class="nav-text">Dashboard</span>
+                    </div>
+                    <div class="nav-item" routerLink="/orders" routerLinkActive="active">
+                        <span class="material-icons nav-icon">inventory</span>
+                        <span class="nav-text">Order Management</span>
+                    </div>
+                    <div class="nav-item active" routerLink="/customers" routerLinkActive="active">
+                        <span class="material-icons nav-icon">people</span>
+                        <span class="nav-text">Customers</span>
+                    </div>
+                    <div class="nav-item" routerLink="/transactions" routerLinkActive="active">
+                        <span class="material-icons nav-icon">credit_card</span>
+                        <span class="nav-text">Transactions</span>
+                    </div>
+                    <div class="nav-item" routerLink="/add-products" routerLinkActive="active">
+                        <span class="material-icons nav-icon">add_box</span>
+                        <span class="nav-text">Add Products</span>
+                    </div>
+                    <div class="nav-item" routerLink="/admin-role" routerLinkActive="active">
+                        <span class="material-icons nav-icon">admin_panel_settings</span>
+                        <span class="nav-text">Admin Role</span>
+                    </div>
+                    <div class="nav-item" routerLink="/settings" routerLinkActive="active">
+                        <span class="material-icons nav-icon">settings</span>
+                        <span class="nav-text">Settings</span>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <header class="top-bar">
+                    <h2>Customers</h2>
+                    <div class="top-bar-right">
+                        <div class="search-box">
+                            <span class="material-icons search-icon">search</span>
+                            <input type="text" placeholder="Search orders...">
+                        </div>
+                        <span class="material-icons notification-icon">notifications</span>
+                        <img src="/assets/admin.jpg" alt="Admin" class="admin-avatar">
+                    </div>
+                </header>
+        
+          
+              <!-- Summary Cards -->
+              <div class="summary-cards">
+                <div class="summary-card">
+                  <div class="card-header">
+                    <h3>Total Customers</h3>
+                    <span class="up">▲ 12%</span>
+                  </div>
+                  <div class="card-body">
+                    <h2>1,230</h2>
+                    <p>Last 7 days</p>
+                  </div>
+                </div>
+          
+                <div class="summary-card">
+                  <div class="card-header">
+                    <h3>New Customers</h3>
+                    <span class="down">▼ 5%</span>
+                  </div>
+                  <div class="card-body">
+                    <h2>85</h2>
+                    <p>Last 7 days</p>
+                  </div>
+                </div>
+          
+                <div class="summary-card">
+                  <div class="card-header">
+                    <h3>Visitors</h3>
+                    <span class="up">▲ 8%</span>
+                  </div>
+                  <div class="card-body">
+                    <h2>450</h2>
+                    <p>Last 7 days</p>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- Customer Table (moved outside summary cards) -->
+              <div class="product-details" style="margin-top: 20px;">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Customer ID</th>
+                      <th>Name</th>
+                      <th>Order Count</th>
+                      <th>Total Spent</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let customer of customers">
+                      <td>{{ customer.id }}</td>
+                      <td>{{ customer.name }}</td>
+                      <td>{{ customer.orderCount }}</td>
+                      <td>${{ customer.totalSpent }}</td>
+                      <td>
+                        <span [ngClass]="{
+                          'status-completed': customer.status === 'Active',
+                          'status-pending': customer.status === 'Pending',
+                          'status-cancelled': customer.status === 'Inactive'
+                        }">
+                          {{ customer.status }}
+                        </span>
+                      </td>
+                      <td>
+                        <span class="action-icon delete-icon" (click)="deleteCustomer(customer)"></span>
+                        <span class="action-icon message-icon" (click)="messageCustomer(customer)"></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          
+            </div> <!-- end of main-content -->
+          </div> <!-- end of admin-dashboard -->
+          
