@@ -1,0 +1,1085 @@
+openapi: 3.0.3
+info:
+  title: Book Store API
+  description: |
+    API for a book store application that allows users to browse, purchase, and manage books.
+    Users can have different roles (regular user, author, seller) with different permissions.
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@bookstore.example.com
+
+servers:
+  - url: http://localhost:3000/api
+    description: Local development server
+  - url: https://api.bookstore.example.com
+    description: Production server
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sb-auth-token
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: "Unauthorized"
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "11111111-1111-1111-1111-111111111111"
+        email:
+          type: string
+          format: email
+          example: "user@example.com"
+        full_name:
+          type: string
+          example: "John Doe"
+        is_author:
+          type: boolean
+          example: false
+        is_seller:
+          type: boolean
+          example: false
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+
+    UserResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/User'
+
+    Book:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        title:
+          type: string
+          example: "The Great Adventure"
+        description:
+          type: string
+          nullable: true
+          example: "An epic tale of adventure and discovery"
+        price:
+          type: number
+          format: float
+          example: 19.99
+        author_id:
+          type: string
+          format: uuid
+          nullable: true
+          example: "22222222-2222-2222-2222-222222222222"
+        seller_id:
+          type: string
+          format: uuid
+          nullable: true
+          example: "33333333-3333-3333-3333-333333333333"
+        stock:
+          type: integer
+          example: 50
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+
+    BookResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Book'
+
+    BooksResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+
+    Purchase:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "11111111-aaaa-1111-aaaa-111111111111"
+        user_id:
+          type: string
+          format: uuid
+          example: "11111111-1111-1111-1111-111111111111"
+        book_id:
+          type: string
+          format: uuid
+          example: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        purchase_date:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        quantity:
+          type: integer
+          example: 1
+        total_price:
+          type: number
+          format: float
+          example: 19.99
+        books:
+          $ref: '#/components/schemas/Book'
+
+    PurchaseResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Purchase'
+
+    PurchasesResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Purchase'
+
+    WishlistItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "aaaaaaaa-1111-aaaa-1111-aaaaaaaaaaaa"
+        user_id:
+          type: string
+          format: uuid
+          example: "11111111-1111-1111-1111-111111111111"
+        book_id:
+          type: string
+          format: uuid
+          example: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        added_at:
+          type: string
+          format: date-time
+          example: "2023-01-01T00:00:00Z"
+        books:
+          $ref: '#/components/schemas/Book'
+
+    WishlistItemResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/WishlistItem'
+
+    WishlistResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WishlistItem'
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+
+    SignupRequest:
+      type: object
+      required:
+        - email
+        - password
+        - full_name
+      properties:
+        email:
+          type: string
+          format: email
+          example: "user@example.com"
+        password:
+          type: string
+          format: password
+          example: "securepassword"
+        full_name:
+          type: string
+          example: "John Doe"
+        is_author:
+          type: boolean
+          example: false
+        is_seller:
+          type: boolean
+          example: false
+
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: "user@example.com"
+        password:
+          type: string
+          format: password
+          example: "securepassword"
+
+    UpdateUserRequest:
+      type: object
+      properties:
+        full_name:
+          type: string
+          example: "John Smith"
+        is_author:
+          type: boolean
+          example: true
+        is_seller:
+          type: boolean
+          example: true
+
+    CreateBookRequest:
+      type: object
+      required:
+        - title
+        - price
+      properties:
+        title:
+          type: string
+          example: "New Book Title"
+        description:
+          type: string
+          example: "Book description"
+        price:
+          type: number
+          format: float
+          example: 19.99
+        stock:
+          type: integer
+          example: 100
+
+    UpdateBookRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Updated Title"
+        description:
+          type: string
+          example: "Updated description"
+        price:
+          type: number
+          format: float
+          example: 24.99
+        stock:
+          type: integer
+          example: 50
+
+    CreatePurchaseRequest:
+      type: object
+      required:
+        - book_id
+      properties:
+        book_id:
+          type: string
+          format: uuid
+          example: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        quantity:
+          type: integer
+          example: 1
+
+    AddToWishlistRequest:
+      type: object
+      required:
+        - book_id
+      properties:
+        book_id:
+          type: string
+          format: uuid
+          example: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+
+paths:
+  /auth/signup:
+    post:
+      summary: Create a new user account
+      description: Register a new user with optional author and seller roles
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupRequest'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/login:
+    post:
+      summary: Log in a user
+      description: Authenticate a user and create a session
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: sb-auth-token=token123; Path=/; HttpOnly
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/logout:
+    post:
+      summary: Log out a user
+      description: End the user's session
+      tags:
+        - Authentication
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Logout successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: ID of the user
+    get:
+      summary: Get user profile
+      description: Retrieve a user's profile information
+      tags:
+        - Users
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: User profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Update user profile
+      description: Update a user's profile information
+      tags:
+        - Users
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: User profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete user account
+      description: Delete a user's account
+      tags:
+        - Users
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: User account deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /books:
+    get:
+      summary: Get all books
+      description: Retrieve a list of all books with optional filtering
+      tags:
+        - Books
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: title
+          in: query
+          schema:
+            type: string
+          description: Filter books by title (partial match)
+        - name: author_id
+          in: query
+          schema:
+            type: string
+            format: uuid
+          description: Filter books by author ID
+        - name: seller_id
+          in: query
+          schema:
+            type: string
+            format: uuid
+          description: Filter books by seller ID
+        - name: min_price
+          in: query
+          schema:
+            type: number
+            format: float
+          description: Filter books by minimum price
+        - name: max_price
+          in: query
+          schema:
+            type: number
+            format: float
+          description: Filter books by maximum price
+      responses:
+        '200':
+          description: Books retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BooksResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new book
+      description: Create a new book (author role required)
+      tags:
+        - Books
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBookRequest'
+      responses:
+        '201':
+          description: Book created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden (author role required)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /books/{bookId}:
+    parameters:
+      - name: bookId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: ID of the book
+    get:
+      summary: Get book by ID
+      description: Retrieve a specific book by its ID
+      tags:
+        - Books
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Book retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Update book
+      description: Update a book (must be the author or seller of the book)
+      tags:
+        - Books
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBookRequest'
+      responses:
+        '200':
+          description: Book updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden (must be author or seller)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete book
+      description: Delete a book (must be the author of the book)
+      tags:
+        - Books
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Book deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden (must be author)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /purchased:
+    get:
+      summary: Get user's purchases
+      description: Retrieve a list of the user's purchases
+      tags:
+        - Purchases
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: book_id
+          in: query
+          schema:
+            type: string
+            format: uuid
+          description: Filter purchases by book ID
+      responses:
+        '200':
+          description: Purchases retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchasesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Purchase a book
+      description: Create a new purchase
+      tags:
+        - Purchases
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePurchaseRequest'
+      responses:
+        '201':
+          description: Purchase created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseResponse'
+        '400':
+          description: Bad request or not enough stock
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /purchased/{purchaseId}:
+    parameters:
+      - name: purchaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: ID of the purchase
+    get:
+      summary: Get purchase by ID
+      description: Retrieve a specific purchase by its ID
+      tags:
+        - Purchases
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Purchase retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Purchase not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Cancel purchase
+      description: Cancel a purchase (must be the user who made the purchase)
+      tags:
+        - Purchases
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Purchase cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Purchase not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /wishlist:
+    get:
+      summary: Get user's wishlist
+      description: Retrieve a list of the user's wishlist items
+      tags:
+        - Wishlist
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Wishlist retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WishlistResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Add book to wishlist
+      description: Add a book to the user's wishlist
+      tags:
+        - Wishlist
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddToWishlistRequest'
+      responses:
+        '201':
+          description: Book added to wishlist successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WishlistItemResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /wishlist/{wishlistId}:
+    parameters:
+      - name: wishlistId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: ID of the wishlist item
+    delete:
+      summary: Remove book from wishlist
+      description: Remove a book from the user's wishlist
+      tags:
+        - Wishlist
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Book removed from wishlist successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Wishlist item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+tags:
+  - name: Authentication
+    description: User authentication operations
+  - name: Users
+    description: User management operations
+  - name: Books
+    description: Book management operations
+  - name: Purchases
+    description: Purchase operations
+  - name: Wishlist
+    description: Wishlist operations
+
+security:
+  - cookieAuth: []
