@@ -1,0 +1,135 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="admin-dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="/assets/book logo.jpg" alt="Logo">
+        </div>
+        <nav class="nav-menu">
+            <div class="nav-item" routerLink="/dashboard" routerLinkActive="active" >
+                <span class="material-icons nav-icon">dashboard</span>
+                <span class="nav-text">Dashboard</span>
+            </div>
+            <div class="nav-item" routerLink="/orders" routerLinkActive="active">
+                <span class="material-icons nav-icon">inventory</span>
+                <span class="nav-text">Order Management</span>
+            </div>
+            <div class="nav-item" routerLink="/customers" routerLinkActive="active">
+                <span class="material-icons nav-icon">people</span>
+                <span class="nav-text">Customers</span>
+            </div>
+            <div class="nav-item" routerLink="/transactions" routerLinkActive="active">
+                <span class="material-icons nav-icon">credit_card</span>
+                <span class="nav-text">Transactions</span>
+            </div>
+            <div class="nav-item" routerLink="/add-products" routerLinkActive="active">
+                <span class="material-icons nav-icon">add_box</span>
+                <span class="nav-text">Add Products</span>
+            </div>
+            <div class="nav-item active" routerLink="/admin-role" routerLinkActive="active">
+                <span class="material-icons nav-icon">admin_panel_settings</span>
+                <span class="nav-text">Admin Role</span>
+            </div>
+            <div class="nav-item" routerLink="/settings" routerLinkActive="active">
+                <span class="material-icons nav-icon">settings</span>
+                <span class="nav-text">Settings</span>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <h2>Admin Role</h2>
+            <div class="top-bar-right">
+                <div class="search-box">
+                    <span class="material-icons search-icon">search</span>
+                    <input type="text" placeholder="Search orders...">
+                </div>
+                <span class="material-icons notification-icon">notifications</span>
+                <img src="/assets/admin.jpg" alt="Admin" class="admin-avatar">
+            </div>
+        </header>
+    </div>
+
+
+    <!-- Role Page Content -->
+    <div class="add-product-page">
+        <div class="product-main">
+          <!-- Left Column -->
+          <div class="product-form">
+            <!-- Profile Info -->
+            <div class="form-section">
+              <h3>Profile</h3>
+              <div class="main-image">
+                <img src="profile.jpg" alt="Profile Photo" />
+              </div>
+              <p>Email: admin.com</p>
+            </div>
+
+             <!-- Change Password -->
+          <div class="form-section">
+            <h3>Change Password</h3>
+            <label for="current-password">Current Password</label>
+            <input type="password" id="current-password" />
+
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" />
+
+            <label for="confirm-password">Re-enter Password</label>
+            <input type="password" id="confirm-password" />
+
+            <div class="form-actions">
+              <button class="publish">Save Changes</button>
+            </div>
+          </div>
+        </div>
+
+         <!-- Right Column -->
+         <div class="product-image-container">
+            <div class="image-section">
+              <h3>Profile Update</h3>
+              <div class="main-image">
+                <img src="profile.jpg" alt="Profile Photo" />
+              </div>
+              <div class="image-buttons">
+                <button>Upload New</button>
+                <button>Delete</button>
+              </div>
+            </div>
+
+            <div class="form-section">
+                <label>First Name</label>
+                <input type="text" placeholder="John" />
+    
+                <label>Last Name</label>
+                <input type="text" placeholder="Doe" />
+    
+                <label>Password</label>
+                <input type="password" placeholder="********" />
+    
+                <label>Phone Number</label>
+                <input type="text" placeholder="+123456789" />
+    
+                <label>Email</label>
+                <input type="email" placeholder="admin@example.com" />
+    
+                <label>Date of Birth</label>
+                <input type="date" />
+    
+                <label>Location</label>
+                <input type="text" placeholder="London, UK" />
+    
+                <label>Credit Card</label>
+                <input type="text" placeholder="**** **** **** 1234" />
+    
+                <div class="form-actions">
+                  <button class="publish">Save Profile</button>
+                </div>
+
+</div>
