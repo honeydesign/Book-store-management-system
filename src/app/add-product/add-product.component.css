@@ -6,15 +6,22 @@ html, body {
     box-sizing: border-box;
   }
   
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+  
   .admin-dashboard {
     display: flex;
     height: 100vh;
     width: 100vw;
   }
   
-  h2 {
+  h2, h3, p {
     font-family: "Roboto", sans-serif;
     font-optical-sizing: auto;
+  }
+  
+  h2 {
     font-weight: 500;
     font-style: normal;
     font-variation-settings: "wdth" 100;
@@ -22,19 +29,11 @@ html, body {
   
   h3 {
     font-size: 1.1rem;
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
     font-variation-settings: "wdth" 100;
   }
   
-  p {
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-  }
-  
-  /* Sidebar */
   .sidebar {
     width: 200px;
     padding: 1rem;
@@ -63,15 +62,27 @@ html, body {
     transition: background-color 0.3s;
   }
   
-  /* Top Bar */
-  .top-bar {
+  .nav-item.active {
+    background-color: #d32f2f;
+    color: #fff;
+  }
+  
+  .main-content {
+    flex: 1;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  
+  .top-bar {
+    height: 60px;
+    padding: 1rem 2rem;
     background-color: #fff;
-    padding-left: 20px;
-    padding-right: 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   
   .top-bar input {
@@ -121,24 +132,20 @@ html, body {
   
   .add-product-page {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    overflow-y: auto;
     padding: 2rem;
     gap: 2rem;
     background-color: #f8f9fa;
-    height: 100%;
     box-sizing: border-box;
+    display: flex;
   }
   
   .product-main {
     display: flex;
     gap: 2rem;
     width: 100%;
-    max-width: 1200px;
   }
   
-  /* Form Container */
   .product-form {
     flex: 2;
     display: flex;
@@ -206,7 +213,6 @@ html, body {
     color: #fff;
   }
   
-  /* Image Upload Section */
   .product-image-container {
     flex: 1;
     display: flex;
